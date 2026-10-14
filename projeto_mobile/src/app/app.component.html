@@ -1,5 +1,5 @@
 <ion-app>
-  <ion-menu side="start" contentId="main-content" *ngIf="isAuthenticated">
+  <ion-menu side="start" contentId="main-content">
     <ion-header>
       <ion-toolbar color="primary">
         <ion-title>TaskFlow</ion-title>
@@ -11,7 +11,7 @@
         <ion-item lines="none">
           <ion-label>
             <h2>{{ displayName }}</h2>
-            <p>Projeto Integrador Mobile</p>
+            <p>Desenvolvimento Mobile</p>
           </ion-label>
         </ion-item>
 
@@ -36,8 +36,6 @@
           </ion-item>
         </ion-menu-toggle>
       </ion-list>
-
-      <ion-button expand="block" color="danger" (click)="logout()">Sair</ion-button>
     </ion-content>
   </ion-menu>
 

@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { TaskItem, TaskPriority } from '../../../core/models/task.model';
-import { NativeService } from '../../../core/services/native.service';
 import { TaskService } from '../../../core/services/task.service';
 
 @Component({
@@ -14,7 +13,6 @@ import { TaskService } from '../../../core/services/task.service';
 export class TaskDetailPage {
   private readonly route = inject(ActivatedRoute);
   private readonly taskService = inject(TaskService);
-  private readonly nativeService = inject(NativeService);
   private readonly router = inject(Router);
   private readonly toastController = inject(ToastController);
 
@@ -24,10 +22,6 @@ export class TaskDetailPage {
   description = '';
   priority: TaskPriority = 'media';
   dueDate?: string;
-  reminderAt?: string;
-  photoDataUrl?: string;
-  latitude?: number;
-  longitude?: number;
 
   ionViewWillEnter(): void {
     // Recupera id da rota para carregar a tarefa correspondente.
@@ -50,51 +44,6 @@ export class TaskDetailPage {
     this.description = found.description;
     this.priority = found.priority;
     this.dueDate = found.dueDate;
-    this.reminderAt = found.reminderAt;
-    this.photoDataUrl = found.photoDataUrl ?? '';
-    this.latitude = found.latitude;
-    this.longitude = found.longitude;
-  }
-
-  async capturePhoto(): Promise<void> {
-    // Vincula foto capturada ao registro da tarefa.
-    this.photoDataUrl = (await this.nativeService.takePhotoBase64()) ?? undefined;
-    if (!this.photoDataUrl) {
-      await this.showToast(
-        'Nao foi possivel capturar foto neste ambiente.',
-        'warning',
-      );
-    }
-  }
-
-  async captureLocation(): Promise<void> {
-    // Salva coordenadas para contextualizar a tarefa no mapa/espaco.
-    const point = await this.nativeService.getCurrentPosition();
-    if (!point) {
-      await this.showToast('Nao foi possivel capturar localizacao.', 'warning');
-      return;
-    }
-
-    this.latitude = point.lat;
-    this.longitude = point.lng;
-  }
-
-  async scheduleReminder(): Promise<void> {
-    if (!this.reminderAt) {
-      await this.showToast('Defina data e hora para o lembrete.', 'warning');
-      return;
-    }
-
-    const ok = await this.nativeService.scheduleReminderAt(
-      'Lembrete de tarefa',
-      this.title || 'Tarefa sem titulo',
-      new Date(this.reminderAt),
-    );
-
-    await this.showToast(
-      ok ? 'Lembrete agendado.' : 'Falha ao agendar lembrete.',
-      ok ? 'success' : 'warning',
-    );
   }
 
   async save(): Promise<void> {
@@ -102,17 +51,13 @@ export class TaskDetailPage {
       return;
     }
 
-    // Persiste alteracoes no backend e retorna para listagem.
+    // Persiste alteracoes na tarefa e retorna para listagem.
     await this.taskService.updateTask({
       ...this.task,
       title: this.title.trim(),
       description: this.description.trim(),
       priority: this.priority,
       dueDate: this.dueDate,
-      reminderAt: this.reminderAt,
-      photoDataUrl: this.photoDataUrl,
-      latitude: this.latitude,
-      longitude: this.longitude,
       updatedAt: new Date().toISOString(),
     });
 

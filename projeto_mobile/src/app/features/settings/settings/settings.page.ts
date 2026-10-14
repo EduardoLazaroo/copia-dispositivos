@@ -1,7 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { AuthService } from '../../../core/services/auth.service';
 import { PreferencesService } from '../../../core/services/preferences.service';
 
 @Component({
@@ -12,8 +10,6 @@ import { PreferencesService } from '../../../core/services/preferences.service';
 })
 export class SettingsPage {
   private readonly preferencesService = inject(PreferencesService);
-  private readonly authService = inject(AuthService);
-  private readonly router = inject(Router);
   private readonly toastController = inject(ToastController);
 
   displayName = 'estudante';
@@ -36,11 +32,6 @@ export class SettingsPage {
 
     document.body.classList.toggle('dark', this.darkMode);
     await this.showToast('Preferencias salvas com sucesso.', 'success');
-  }
-
-  async logout(): Promise<void> {
-    await this.authService.logout();
-    await this.router.navigateByUrl('/login', { replaceUrl: true });
   }
 
   private async showToast(message: string, color: 'success' | 'warning'): Promise<void> {
