@@ -1,0 +1,43 @@
+:host {
+  --bg-1: #0f2a36;
+  --bg-2: #1e566d;
+}
+
+.login-content {
+  --background: linear-gradient(160deg, var(--bg-1), var(--bg-2));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+.hero {
+  color: #f5fbff;
+  margin: 18px;
+
+  .hero-kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 12px;
+    opacity: 0.85;
+  }
+
+  h1 {
+    margin: 8px 0;
+    font-size: 28px;
+    line-height: 1.1;
+  }
+
+  p {
+    opacity: 0.9;
+  }
+}
+
+ion-card {
+  border-radius: 16px;
+  margin: 0 12px;
+}
+
+ion-button {
+  margin-top: 18px;
+}

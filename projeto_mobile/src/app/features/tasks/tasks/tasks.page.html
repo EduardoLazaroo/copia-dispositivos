@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Tarefas do Semestre</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="importExternalTasks()">Importar API</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Nova tarefa</ion-card-title>
+      <ion-card-subtitle>Planejamento e pratica incremental</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">Titulo</ion-label>
+        <ion-input [(ngModel)]="title" placeholder="Ex.: Implementar rotas protegidas"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Descricao</ion-label>
+        <ion-textarea [(ngModel)]="description" rows="2"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Prioridade</ion-label>
+        <ion-select [(ngModel)]="priority">
+          <ion-select-option value="baixa">Baixa</ion-select-option>
+          <ion-select-option value="media">Media</ion-select-option>
+          <ion-select-option value="alta">Alta</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Prazo (opcional)</ion-label>
+        <ion-datetime-button datetime="task-due"></ion-datetime-button>
+      </ion-item>
+
+      <ion-modal [keepContentsMounted]="true">
+        <ng-template>
+          <ion-datetime id="task-due" presentation="date" [(ngModel)]="dueDate"></ion-datetime>
+        </ng-template>
+      </ion-modal>
+
+      <ion-button expand="block" (click)="onAddTask()">Adicionar tarefa</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let task of visibleTasks; trackBy: trackByTask">
+      <ion-item [class.done]="task.done">
+        <ion-checkbox slot="start" [checked]="task.done" (ionChange)="onToggleTask(task)"></ion-checkbox>
+
+        <ion-label>
+          <h2>{{ task.title }}</h2>
+          <p>{{ task.description || 'Sem descricao' }}</p>
+          <p class="meta">Prioridade: {{ task.priority }} | Prazo: {{ task.dueDate || 'Nao definido' }}</p>
+        </ion-label>
+
+        <ion-button slot="end" fill="clear" (click)="goToDetails(task)">Detalhes</ion-button>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="onRemoveTask(task)">Remover</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

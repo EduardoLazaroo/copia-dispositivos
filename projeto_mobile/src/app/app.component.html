@@ -1,0 +1,45 @@
+<ion-app>
+  <ion-menu side="start" contentId="main-content" *ngIf="isAuthenticated">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>TaskFlow</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list>
+        <ion-item lines="none">
+          <ion-label>
+            <h2>{{ displayName }}</h2>
+            <p>Projeto Integrador Mobile</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-menu-toggle auto-hide="true">
+          <ion-item routerLink="/app/tasks">
+            <ion-icon name="checkmark-done-outline" slot="start"></ion-icon>
+            <ion-label>Tarefas</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle auto-hide="true">
+          <ion-item routerLink="/app/calendar">
+            <ion-icon name="calendar-outline" slot="start"></ion-icon>
+            <ion-label>Calendario</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle auto-hide="true">
+          <ion-item routerLink="/app/settings">
+            <ion-icon name="settings-outline" slot="start"></ion-icon>
+            <ion-label>Configuracoes</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+
+      <ion-button expand="block" color="danger" (click)="logout()">Sair</ion-button>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+</ion-app>

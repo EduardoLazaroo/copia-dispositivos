@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Detalhes da Tarefa</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">Titulo</ion-label>
+        <ion-input [(ngModel)]="title"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Descricao</ion-label>
+        <ion-textarea [(ngModel)]="description"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Prioridade</ion-label>
+        <ion-select [(ngModel)]="priority">
+          <ion-select-option value="baixa">Baixa</ion-select-option>
+          <ion-select-option value="media">Media</ion-select-option>
+          <ion-select-option value="alta">Alta</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Prazo</ion-label>
+        <ion-datetime presentation="date" [(ngModel)]="dueDate"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Lembrete</ion-label>
+        <ion-datetime presentation="date-time" [(ngModel)]="reminderAt"></ion-datetime>
+      </ion-item>
+
+      <ion-button expand="block" (click)="capturePhoto()">Capturar foto</ion-button>
+      <img *ngIf="photoDataUrl" [src]="photoDataUrl" alt="Foto da tarefa" />
+
+      <ion-button expand="block" (click)="captureLocation()">Capturar localizacao</ion-button>
+      <p *ngIf="latitude && longitude">{{ latitude | number: '1.4-4' }}, {{ longitude | number: '1.4-4' }}</p>
+
+      <ion-button expand="block" fill="outline" (click)="scheduleReminder()">Agendar lembrete</ion-button>
+      <ion-button expand="block" color="success" (click)="save()">Salvar alteracoes</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
