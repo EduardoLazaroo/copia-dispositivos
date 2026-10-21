@@ -23,30 +23,15 @@ async function initializeDatabase() {
   });
 
   await pool.query(`
-    CREATE TABLE IF NOT EXISTS users (
-      id CHAR(36) PRIMARY KEY,
-      username VARCHAR(80) NOT NULL UNIQUE,
-      password_hash VARCHAR(255) NOT NULL,
-      created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-    )
-  `);
-
-  await pool.query(`
     CREATE TABLE IF NOT EXISTS tasks (
       id CHAR(36) PRIMARY KEY,
-      user_id CHAR(36) NOT NULL,
       title VARCHAR(160) NOT NULL,
       description TEXT NOT NULL,
       done BOOLEAN NOT NULL DEFAULT FALSE,
       priority ENUM('baixa', 'media', 'alta') NOT NULL DEFAULT 'media',
       due_date DATETIME NULL,
-      reminder_at DATETIME NULL,
-      photo_data_url LONGTEXT NULL,
-      latitude DECIMAL(10, 7) NULL,
-      longitude DECIMAL(10, 7) NULL,
       created_at DATETIME NOT NULL,
-      updated_at DATETIME NOT NULL,
-      CONSTRAINT fk_tasks_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+      updated_at DATETIME NOT NULL
     )
   `);
 }

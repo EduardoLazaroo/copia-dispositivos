@@ -2,7 +2,7 @@
   "name": "agenda-mobile-api",
   "version": "1.0.0",
   "private": true,
-  "description": "API REST para autenticacao e tarefas do Projeto Mobile.",
+  "description": "API REST de tarefas para o Projeto Mobile.",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
@@ -10,11 +10,9 @@
     "test": "node --test"
   },
   "dependencies": {
-    "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
     "express": "^5.1.0",
-    "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.14.4"
   }
 }

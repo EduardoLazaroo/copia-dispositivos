@@ -1,10 +1,12 @@
 # Agenda Mobile API
 
-API REST para o aplicativo Ionic `projeto_mobile`, com usuarios, autenticacao JWT e tarefas por usuario.
+API REST para o aplicativo Ionic `projeto_mobile`, com tarefas para as aulas
+de consumo de API e persistencia local.
 
 ## Banco de dados
 
-A API usa MySQL em `127.0.0.1:3306`, usuario `root`, senha `root` e cria automaticamente o banco `agenda_mobile` e as tabelas `users` e `tasks`.
+A API usa MySQL em `127.0.0.1:3306`, usuario `root`, senha `root` e cria
+automaticamente o banco `agenda_mobile` e a tabela `tasks`.
 
 1. Copie `.env.example` para `.env`.
 2. Ajuste as variaveis se necessario.
@@ -13,12 +15,10 @@ A API usa MySQL em `127.0.0.1:3306`, usuario `root`, senha `root` e cria automat
 ## Rotas
 
 - `GET /health`
-- `POST /api/auth/register` com `{ "username", "password" }`
-- `POST /api/auth/login` com `{ "username", "password" }`
-- `GET /api/tasks` com `Authorization: Bearer <token>`
-- `POST /api/tasks` com `Authorization: Bearer <token>`
-- `PUT /api/tasks/:id` com `Authorization: Bearer <token>`
-- `DELETE /api/tasks/:id` com `Authorization: Bearer <token>`
+- `GET /api/tasks`
+- `POST /api/tasks`
+- `PUT /api/tasks/:id`
+- `DELETE /api/tasks/:id`
 
 ## Testes
 

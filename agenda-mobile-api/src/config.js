@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const required = ['DB_HOST', 'DB_PORT', 'DB_NAME', 'DB_USER', 'DB_PASSWORD', 'JWT_SECRET'];
+const required = ['DB_HOST', 'DB_PORT', 'DB_NAME', 'DB_USER', 'DB_PASSWORD'];
 
 // Falha cedo quando faltar configuracao critica.
 for (const key of required) {
@@ -18,5 +18,4 @@ module.exports = {
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
   },
-  jwtSecret: process.env.JWT_SECRET,
 };
