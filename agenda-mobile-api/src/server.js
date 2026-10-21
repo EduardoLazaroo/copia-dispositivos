@@ -1,14 +1,10 @@
+// Importa a aplicação configurada em app.js
 const app = require('./app');
-const { port } = require('./config');
-const { initializeDatabase } = require('./db');
 
-async function start() {
-  // Garante schema/tabelas antes de aceitar requisicoes.
-  await initializeDatabase();
-  app.listen(port, () => console.log(`API em execucao: http://localhost:${port}`));
-}
+// Define a porta do servidor
+const PORT = 3000;
 
-start().catch((error) => {
-  console.error('Nao foi possivel iniciar a API. Verifique a conexao MySQL e o arquivo .env.', error.message);
-  process.exit(1);
+// Inicializa o servidor HTTP
+app.listen(PORT, () => {
+  console.log(`API em execucao: http://localhost:${PORT}`);
 });

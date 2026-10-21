@@ -1,30 +1,37 @@
-import { Component, inject } from '@angular/core';
-import { PreferencesService } from './core/services/preferences.service';
-import { TaskService } from './core/services/task.service';
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import {
+  IonApp,
+  IonMenu,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonRouterOutlet
+} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [
+    RouterLink,
+    IonApp,
+    IonMenu,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonList,
+    IonItem,
+    IonLabel,
+    IonRouterOutlet
+  ]
 })
 export class AppComponent {
-  private readonly preferencesService = inject(PreferencesService);
-  private readonly taskService = inject(TaskService);
-
-  displayName = 'estudante';
-
-  constructor() {
-    // Inicializa preferencias e carga de dados locais ao abrir o app.
-    this.bootstrapApplication();
-  }
-
-  private async bootstrapApplication(): Promise<void> {
-    const preferences = await this.preferencesService.load();
-    this.displayName = preferences.displayName;
-    document.body.classList.toggle('dark', preferences.darkMode);
-
-    // Carga inicial das tarefas (persistencia local e API).
-    await this.taskService.loadTasks();
-  }
+  constructor() {}
 }
