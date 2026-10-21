@@ -1,25 +1,21 @@
-# Agenda Mobile API
+# Mobile API
 
-API REST para o aplicativo Ionic `projeto_mobile`, com tarefas para as aulas
-de consumo de API e persistencia local.
+API Backend em Node.js e Express para suporte às aulas práticas da disciplina de Desenvolvimento de Aplicativos Móveis.
 
-## Banco de dados
+## Execução
 
-A API usa MySQL em `127.0.0.1:3306`, usuario `root`, senha `root` e cria
-automaticamente o banco `agenda_mobile` e a tabela `tasks`.
+1. Instalar as dependências (se necessário):
+   ```bash
+   npm install
+   ```
 
-1. Copie `.env.example` para `.env`.
-2. Ajuste as variaveis se necessario.
-3. Execute `npm start`.
+2. Iniciar a API:
+   ```bash
+   npm start
+   ```
 
-## Rotas
+O servidor será inicializado em `http://localhost:3000`.
 
-- `GET /health`
-- `GET /api/tasks`
-- `POST /api/tasks`
-- `PUT /api/tasks/:id`
-- `DELETE /api/tasks/:id`
+## Endpoints Disponíveis (Aula 08)
 
-## Testes
-
-Execute `npm test` para verificar a rota de saude sem necessidade de banco.
+- `GET /health` — Verificação de status e saúde da API (retorna `{ "status": "ok" }`).
