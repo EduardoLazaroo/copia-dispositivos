@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
   {
@@ -15,21 +16,14 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/cadastro/cadastro.page').then( m => m.CadastroPage)
   },
   {
-    path: 'detalhes/:id', // O símbolo :id indica um parâmetro dinâmico de URL
-    loadComponent: () => import('./pages/detalhes/detalhes.page').then( m => m.DetalhesPage)
-  },
-  {
-    path: 'produtos',
-    loadComponent: () => import('./pages/produtos/produtos.page').then(m => m.ProdutosPage)
-  },
-  {
-    path: 'configuracoes',
-    loadComponent: () => import('./pages/configuracoes/configuracoes.page').then(m => m.ConfiguracoesPage)
+    path: 'detalhes/:id',
+    loadComponent: () => import('./pages/detalhes/detalhes.page').then( m => m.DetalhesPage),
+    canActivate: [authGuard]
   },
   {
     path: 'tabs',
     loadComponent: () => import('./pages/tabs/tabs.page').then( m => m.TabsPage),
-    // Declaração de rotas filhas sob a casca do 'tabs'
+    canActivate: [authGuard], // Protege todas as rotas filhas do 'tabs'
     children: [
       {
         path: 'inicio',
@@ -45,5 +39,15 @@ export const routes: Routes = [
         pathMatch: 'full'
       }
     ]
+  },
+  {
+    path: 'produtos',
+    loadComponent: () => import('./pages/produtos/produtos.page').then( m => m.ProdutosPage),
+    canActivate: [authGuard]
+  },
+  {
+    path: 'configuracoes',
+    loadComponent: () => import('./pages/configuracoes/configuracoes.page').then( m => m.ConfiguracoesPage),
+    canActivate: [authGuard]
   }
 ];

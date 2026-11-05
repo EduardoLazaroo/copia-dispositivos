@@ -10,6 +10,13 @@
   padding-top: 20px;
 }
 
+/* Garante contraste da cor do texto e do placeholder no formulário */
+ion-input {
+  --color: #1e293b;
+  --placeholder-color: #64748b;
+  --highlight-color-focused: var(--ion-color-primary);
+}
+
 // Estilização do Cartão Ionic
 .login-card {
   border-radius: 16px;

@@ -1,22 +1,25 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { 
-  IonContent, 
-  IonHeader, 
-  IonTitle, 
-  IonToolbar, 
-  IonCard, 
-  IonCardHeader, 
-  IonCardTitle, 
-  IonCardContent, 
-  IonItem, 
-  IonLabel, 
-  IonInput, 
-  IonButton 
+import {
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardContent,
+  IonItem,
+  IonLabel,
+  IonInput,
+  IonButton
 } from '@ionic/angular/standalone';
 import { UsuarioService, PerfilUsuario } from '../../services/usuario.service';
 import { Subscription } from 'rxjs';
+// Adicionar as importações no topo:
+import { AuthService } from '../../services/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
@@ -24,19 +27,19 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./perfil.page.scss'],
   standalone: true,
   imports: [
-    CommonModule, 
-    FormsModule, 
-    IonContent, 
-    IonHeader, 
-    IonTitle, 
-    IonToolbar, 
-    IonCard, 
-    IonCardHeader, 
-    IonCardTitle, 
-    IonCardContent, 
-    IonItem, 
-    IonLabel, 
-    IonInput, 
+    CommonModule,
+    FormsModule,
+    IonContent,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardContent,
+    IonItem,
+    IonLabel,
+    IonInput,
     IonButton
   ]
 })
@@ -45,8 +48,12 @@ export class PerfilPage implements OnInit, OnDestroy {
   novoNome: string = '';
   private inscricao: Subscription = new Subscription();
 
-  // Injeção de dependência do serviço no construtor
-  constructor(private usuarioService: UsuarioService) { }
+  // Injetar no construtor da classe PerfilPage:
+  constructor(
+    private usuarioService: UsuarioService,
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     // Inscrição reativa para ouvir alterações no perfil do usuário em tempo real
@@ -69,5 +76,11 @@ export class PerfilPage implements OnInit, OnDestroy {
   // Boa prática: Cancelar a inscrição ao destruir o componente para evitar vazamento de memória
   ngOnDestroy() {
     this.inscricao.unsubscribe();
+  }
+
+  // Adicionar o método de logout:
+  async realizarLogout() {
+    await this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }
