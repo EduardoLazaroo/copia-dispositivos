@@ -21,7 +21,7 @@ export interface RespostaLogin {
 })
 export class AuthService {
   // URL do endpoint responsável por validar as credenciais.
-  private apiUrl = 'http://localhost:3000/login';
+  private apiUrl = `http://${window.location.hostname}:3000/login`;
 
   constructor(
     // HttpClient envia a requisição HTTP para a API.

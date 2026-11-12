@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Recursos do Dispositivo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Status de Conexão de Rede -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Status da Conexão de Rede</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Estado Atual:
+        <ion-badge [color]="redeOnline ? 'success' : 'danger'">
+          {{ redeOnline ? 'ONLINE' : 'OFFLINE' }}
+        </ion-badge>
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Localização via GPS -->
+  <ion-card class="ion-margin-top">
+    <ion-card-header>
+      <ion-card-title>Localização via GPS</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div *ngIf="carregandoGps" class="ion-text-center">
+        <ion-spinner name="crescent"></ion-spinner>
+        <p>Buscando coordenadas...</p>
+      </div>
+
+      <div *ngIf="!carregandoGps && latitude !== null">
+        <p>Latitude: <strong>{{ latitude }}</strong></p>
+        <p>Longitude: <strong>{{ longitude }}</strong></p>
+      </div>
+
+      <ion-button expand="block" color="primary" class="ion-margin-top" (click)="capturarGps()">
+        Obter Minhas Coordenadas
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

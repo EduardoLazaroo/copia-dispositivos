@@ -6,6 +6,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http'; // I
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 import { jwtInterceptor } from './app/interceptors/jwt-interceptor';
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -15,3 +16,4 @@ bootstrapApplication(AppComponent, {
     provideHttpClient(withInterceptors([jwtInterceptor]))
   ],
 });
+defineCustomElements(window);

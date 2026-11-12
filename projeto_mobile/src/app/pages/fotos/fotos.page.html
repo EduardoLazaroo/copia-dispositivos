@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Captura de Fotos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding ion-text-center">
+  <div class="botoes-container">
+    <ion-button expand="block" color="primary" (click)="tirarFoto()">
+      Tirar Foto com Câmera
+    </ion-button>
+
+    <ion-button expand="block" fill="outline" color="secondary" class="ion-margin-top" (click)="abrirGaleria()">
+      Escolher da Galeria
+    </ion-button>
+  </div>
+
+  <!-- Exibição da Foto Capturada -->
+  <ion-card class="ion-margin-top" *ngIf="fotoUrl">
+    <ion-img [src]="fotoUrl" alt="Foto capturada"></ion-img>
+  </ion-card>
+</ion-content>
